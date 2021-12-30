@@ -1,0 +1,36 @@
+.login-btn {
+    width: 150px;
+    margin: 10px auto;
+}
+
+.mainbox {
+    width: 250px;
+    height: 150px;
+    margin: auto;
+    border: 3px solid #CCCCCC;
+    border-radius: 10px;
+}
+
+.login-text {
+    margin-top: 15px;
+}
+
+.mainbox-logout {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.mainbox-logout button {
+    margin-right: 50px;
+}
+
+.mainbox-logout h3 {
+    margin-left: 50px;
+}
+
+.admin-textpanel {
+    background-color: turquoise;
+    margin-bottom: 0;
+}

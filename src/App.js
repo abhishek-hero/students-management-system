@@ -4,6 +4,7 @@ import Home from "./components/Home/index";
 import Contest from "./components/Contest/index";
 import { Navigation } from "./components/Navbar/Navigation";
 import { Admin } from "./components/Admin/Admin";
+import { Student } from "./pages/Student";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <Navigation />
       </div>
       <Switch>
+        <Route path="/students">
+          <Student />
+        </Route>
         <Route path="/admin">
           <Admin />
         </Route>
