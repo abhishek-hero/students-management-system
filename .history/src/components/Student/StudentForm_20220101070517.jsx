@@ -1,18 +1,30 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import "./studentForm.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  addStudent,
   addStudentLoading,
   addStudentSuccess,
-  addStudentError,
+  getStudent,
 } from "../../Redux/actions";
 
 export const StudentForm = () => {
   const dispatch = useDispatch();
 
-  // handle Inputs
+  const { loading, error, data } = useSelector((store) => store.students);
+  console.log(data);
+
+  useEffect(() => {
+    getStudent();
+  }, []);
+
+  const getStudent = async () => {
+    const { data } = await axios.get("/smu-users");
+    // dispatch(getStudent(data));
+  };
+
   const [input, setInput] = useState({
     username: "",
     city: "",
@@ -32,7 +44,6 @@ export const StudentForm = () => {
     });
   };
 
-  // Add students
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch(addStudentLoading());
@@ -49,8 +60,9 @@ export const StudentForm = () => {
 
       dispatch(addStudentSuccess(data));
     } catch (err) {
-      dispatch(addStudentError(err));
+      dispatch(addStudentLoading(err));
     }
+    getStudent();
   };
   return (
     <div className="container form__div">

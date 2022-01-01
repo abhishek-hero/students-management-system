@@ -1,0 +1,4 @@
+export const ADD_STUDENT = 'ADD_STUDENT'
+export const REMOVE_STUDENT = 'REMOVE_STUDENT'
+export const ADD_CONTEST = 'ADD_CONTEST'
+export const REMOVE_CONTEST = 'REMOVE_CONTEST'

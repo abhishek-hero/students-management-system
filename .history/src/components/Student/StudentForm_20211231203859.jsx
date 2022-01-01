@@ -1,18 +1,24 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import "./studentForm.css";
 import axios from "axios";
-import {
-  addStudentLoading,
-  addStudentSuccess,
-  addStudentError,
-} from "../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addStudent } from "../../Redux/actions";
 
 export const StudentForm = () => {
   const dispatch = useDispatch();
 
-  // handle Inputs
+  const students = useSelector((store) => store.students);
+  console.log(students);
+
+  useEffect(() => {
+    getStudent();
+  }, []);
+
+  const getStudent = async () => {
+    const { data } = await axios.get("/smu-users");
+  };
+
   const [input, setInput] = useState({
     username: "",
     city: "",
@@ -32,25 +38,18 @@ export const StudentForm = () => {
     });
   };
 
-  // Add students
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(addStudentLoading());
-
-    try {
-      const { data } = await axios.post("/smu-users", {
-        username: input.username,
-        city: input.city,
-        age: input.age,
-        education: input.education,
-        gender: input.gender,
-        contact: input.contact,
-      });
-
-      dispatch(addStudentSuccess(data));
-    } catch (err) {
-      dispatch(addStudentError(err));
-    }
+    const { data } = await axios.post("/smu-users", {
+      username: input.username,
+      city: input.city,
+      age: input.age,
+      education: input.education,
+      gender: input.gender,
+      contact: input.contact,
+    });
+    dispatch(addStudents(data));
+    getStudent();
   };
   return (
     <div className="container form__div">

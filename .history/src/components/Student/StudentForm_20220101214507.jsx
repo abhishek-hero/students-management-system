@@ -1,16 +1,31 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import "./studentForm.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { store } from "../../Redux/store";
 import {
   addStudentLoading,
   addStudentSuccess,
   addStudentError,
+  getData,
 } from "../../Redux/actions";
 
 export const StudentForm = () => {
   const dispatch = useDispatch();
+
+  const { loading, error, data } = useSelector((store) => store.students);
+  console.log("data", data);
+
+  console.log(store.getState());
+  // get students
+  useEffect(() => {
+    getStudent();
+  }, []);
+
+  const getStudent = () => {
+    dispatch(getData());
+  };
 
   // handle Inputs
   const [input, setInput] = useState({
@@ -48,6 +63,7 @@ export const StudentForm = () => {
       });
 
       dispatch(addStudentSuccess(data));
+      getStudent();
     } catch (err) {
       dispatch(addStudentError(err));
     }

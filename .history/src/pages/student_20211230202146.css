@@ -1,0 +1,7 @@
+.card__student {
+    width: 70%;
+    height: 100px;
+    background-color: #ccc;
+    border: 1px solid turquoise;
+    margin: auto;
+}
